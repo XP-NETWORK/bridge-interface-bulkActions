@@ -227,13 +227,18 @@ export default function ButtonToTransfer() {
 
   const sendTezosNft = async (nft, index) => {
     try {
-      console.log(privateKey);
+      
       const Tezos = new TezosToolkit("https://mainnet.smartpy.io");
       const signer = await InMemorySigner.fromSecretKey(privateKey);
       
       const factory = await getFactory();
       const toChain = await factory.inner(chainsConfig[to].Chain);
       const tezos = await factory.inner(Chain.TEZOS); // 18
+
+      console.log("nft" , nft);
+      console.log("privateKey" , privateKey);
+      console.log("signer" , signer)
+      console.log("toChain", toChain)
 
       const tezosResult = await factory.transferNft(
         tezos, // The Source Chain.
@@ -245,8 +250,12 @@ export default function ButtonToTransfer() {
         undefined
       );
       console.log(tezosResult);
+      console.log("-----------------")
+      console.log(" ")
     } catch (err) {
       console.log(err);
+      console.log("-----------------")
+      console.log(" ")
     }
   };
 
