@@ -225,35 +225,6 @@ export default function ButtonToTransfer() {
     }
   };
 
-  const sendTezosNft = async (nft, index) => {
-    try {
-      const signer = await InMemorySigner.fromSecretKey(privateKey);
-      const factory = await getFactory();
-      const toChain = await factory.inner(chainsConfig[to].Chain);
-      const tezos = await factory.inner(Chain.TEZOS); // 18
-
-      const isApprovedTezos = await tezos.approveForMinter(nft, signer);
-      console.log("Is Approved in Tezos:", isApprovedTezos);
-
-      const tezosResult = await factory.transferNft(
-        tezos, // The Source Chain.
-        toChain, // The Destination Chain.
-        nft, // Or the NFT object you have chosen from the list.
-        signer, // The Tron signer object (see p. 3.5 above).
-        receiverAddress || receiver, // The address whom you are transferring the NFT to.
-        bigNumberFees,
-        undefined
-      );
-      console.log(tezosResult);
-      console.log("-----------------");
-      console.log(" ");
-    } catch (err) {
-      console.log(err);
-      console.log("-----------------");
-      console.log(" ");
-    }
-  };
-
   const sendAllNFTs = async () => {
     if (!receiver) {
       dispatch(setPasteDestinationAlert(true));
@@ -261,7 +232,7 @@ export default function ButtonToTransfer() {
       dispatch(setSelectNFTAlert(true));
     } else if (!privateKey) {
       dispatch(setNoApprovedNFTAlert(true));
-    } else if (!loading) {
+    } else if (!loading && from === "Tezos") {
       setLoading(true);
       dispatch(setTransferLoaderModal(true));
       console.log("key", privateKey)
@@ -291,6 +262,43 @@ export default function ButtonToTransfer() {
           );
 
           console.log("tezosResult", tezosResult);
+          console.log("-----------------");
+          console.log(" ");
+        } catch (err) {
+          console.log(err.message)
+        }
+
+      }
+    } else if (!loading && from === "Polygon") {
+      setLoading(true);
+      dispatch(setTransferLoaderModal(true));
+      console.log("key", privateKey)
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const signer = new ethers.Wallet(privateKey, provider);
+      const factory = await getFactory();
+      const toChain = await factory.inner(chainsConfig[to].Chain);
+      const polygon = await factory.inner(Chain.POLYGON); // 18
+
+      console.log("nft length:", selectedNFTList.length);
+      for (let i = 0; i < selectedNFTList.length; i++) {
+        try {
+          console.log("selected:", selectedNFTList[i])
+          const isApprovedPolygon = await polygon.approveForMinter(selectedNFTList[i], signer);
+          console.log("Is Approved in Polygon:", isApprovedPolygon);
+
+          // if (!isApprovedTezos)return;
+
+          const polygonResult = await factory.transferNft(
+            polygon, // The Source Chain.
+            toChain, // The Destination Chain.
+            selectedNFTList[i], // Or the NFT object you have chosen from the list.
+            signer, // The Tron signer object (see p. 3.5 above).
+            receiverAddress || receiver, // The address whom you are transferring the NFT to.
+            bigNumberFees,
+            undefined
+          );
+
+          console.log("polygonResult:", polygonResult);
           console.log("-----------------");
           console.log(" ");
         } catch (err) {
