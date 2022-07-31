@@ -12,7 +12,7 @@
 .nft__card--selected {
     margin: 0 auto;
     width: 200px;
-    height: 100px;
+    height: 268px;
     background: #f0f2f5;
     border-radius: 20px;
     overflow: hidden;
@@ -25,14 +25,14 @@
     box-shadow: 0px 1px 9px rgba(55, 63, 92, 0.52);
 }
 .nft__main {
-    height:04px;
+    height: 204px;
     overflow: hidden;
     display: flex;
     justify-content: center;
     position: relative;
 }
 .nft__footer {
-    height: 164px;
+    height: 64px;
     border-top: 1px solid white;
     padding: 6px 12px;
     display: flex;

@@ -101,7 +101,7 @@ export default function NFTcard({ nft, index, claimables }) {
               className={nft.whitelisted ? "nft__card--selected" : "nft__card"}
             >
               <div className="nft__main">
-                {/* {nft.uri && nft.image && nft.animation_url ? (
+                {nft.uri && nft.image && nft.animation_url ? (
                   <VideoAndImage
                     index={index}
                     videoUrl={nft.animation_url}
@@ -113,9 +113,9 @@ export default function NFTcard({ nft, index, claimables }) {
                   <Image onError={setImageErr} nft={nft} index={index} />
                 ) : (
                   <BrockenUtlGridView />
-                )} */}
+                )}
 
-                {/* {!claimables && nft.whitelisted ? (
+                {!claimables && nft.whitelisted ? (
                   !isSelected ? (
                     <div className="nft-radio"></div>
                   ) : (
@@ -123,8 +123,8 @@ export default function NFTcard({ nft, index, claimables }) {
                   )
                 ) : (
                   ""
-                )} */}
-                {/* <div className="zoomDiv">
+                )}
+                <div className="zoomDiv">
                   <ModalImage
                     className="zoomInBtn"
                     small={zoomIn}
@@ -132,9 +132,9 @@ export default function NFTcard({ nft, index, claimables }) {
                     hideDownload={true}
                     hideZoom={true}
                   />
-                </div> */}
-                {/* {!nft.whitelisted && <NotWhiteListed />}
-                {claimables && <ClaimableCard nft={nft} index={index} />} */}
+                </div>
+                {!nft.whitelisted && <NotWhiteListed />}
+                {claimables && <ClaimableCard nft={nft} index={index} />}
               </div>
               {/* // ! */}
               <div className="nft__footer">
