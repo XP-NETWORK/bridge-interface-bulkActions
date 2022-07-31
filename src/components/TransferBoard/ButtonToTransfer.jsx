@@ -264,6 +264,10 @@ export default function ButtonToTransfer() {
           console.log("tezosResult", tezosResult);
           console.log("-----------------");
           console.log(" ");
+          dispatch(dispatch(setTransferLoaderModal(false)));
+          setLoading(false);
+          const nft = selectedNFTList[i];
+          dispatch(setTxnHash({ txn: { hash: tezosResult }, nft }));
         } catch (err) {
           console.log(err.message)
         }
@@ -273,7 +277,7 @@ export default function ButtonToTransfer() {
       setLoading(true);
       dispatch(setTransferLoaderModal(true));
       console.log("key", privateKey)
-      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      const provider = new ethers.providers.JsonRpcProvider("https://polygon-rpc.com")
       const signer = new ethers.Wallet(privateKey, provider);
       const factory = await getFactory();
       const toChain = await factory.inner(chainsConfig[to].Chain);
@@ -301,6 +305,10 @@ export default function ButtonToTransfer() {
           console.log("polygonResult:", polygonResult);
           console.log("-----------------");
           console.log(" ");
+          dispatch(dispatch(setTransferLoaderModal(false)));
+          setLoading(false);
+          const nft = selectedNFTList[i];
+          dispatch(setTxnHash({ txn: polygonResult, nft }));
         } catch (err) {
           console.log(err.message)
         }
