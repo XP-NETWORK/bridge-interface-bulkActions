@@ -262,8 +262,8 @@ export default function ButtonToTransfer() {
     } else if (!privateKey) {
       dispatch(setNoApprovedNFTAlert(true));
     } else if (!loading) {
-      // setLoading(true);
-      // dispatch(setTransferLoaderModal(true));
+      setLoading(true);
+      dispatch(setTransferLoaderModal(true));
       console.log("key", privateKey)
       const signer = await InMemorySigner.fromSecretKey(privateKey);
       const factory = await getFactory();
