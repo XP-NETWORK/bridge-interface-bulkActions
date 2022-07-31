@@ -149,8 +149,8 @@ export default function ChainListBox(props) {
             location.pathname === "/testnet/connect" ||
             location.pathname === "/"
         ) {
-            setFromChains(sorted.filter((e) => e.text === "Tezos" ));
-        } else setFromChains(sorted.filter((e) => e.text === "Tezos" ));
+            setFromChains(sorted.filter((e) => e.text === "Tezos"|| e.text === "Polygon" ));
+        } else setFromChains(sorted.filter((e) => e.text === "Tezos" || e.text === "Polygon"));
     }, [
         elrondAccount,
         tezosAccount,
