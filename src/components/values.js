@@ -31,6 +31,7 @@ export const biz =
   window.location.hostname.includes("staging") ||
   window.location.hostname.includes("development");
 
+export const validatedChains = ["Tezos", "Polygon", "Harmony", "Elrond"];
 export const chains = [
   {
     type: "EVM",
