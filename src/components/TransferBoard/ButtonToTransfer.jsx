@@ -45,7 +45,7 @@ export default function ButtonToTransfer() {
         signer = await InMemorySigner.fromSecretKey(privateKey);
         fromChain = await factory.inner(Chain.TEZOS);
 
-      } else if (from === "Polygon" || from === "Harmony") {
+      } else if (from === "Polygon" || from === "Harmony" || from === "Ethereum") {
         console.log("rpc:", chainsConfig[from].rpc);
         const provider = new ethers.providers.JsonRpcProvider(chainsConfig[from].rpc);
         signer = new ethers.Wallet(privateKey, provider);
@@ -100,7 +100,7 @@ export default function ButtonToTransfer() {
           const nft = selectedNFTList[i];
           if (from === "Tezos") {
             dispatch(setTxnHash({ txn: { hash: result }, nft }));
-          } else if (from === "Polygon" || from === "Harmony") {
+          } else if (from === "Polygon" || from === "Harmony" || from === "Ethereum") {
             dispatch(setTxnHash({ txn: result, nft }));
           }
         } catch (err) {
