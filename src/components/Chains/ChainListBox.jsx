@@ -4,6 +4,7 @@ import {
     chains,
     CHAIN_INFO,
     TESTNET_CHAIN_INFO,
+    validatedChains
 } from "../../components/values";
 import {
     setChainModal,
@@ -149,8 +150,8 @@ export default function ChainListBox(props) {
             location.pathname === "/testnet/connect" ||
             location.pathname === "/"
         ) {
-            setFromChains(sorted.filter((e) => e.text === "Tezos"|| e.text === "Polygon" || e.text === "Elrond"));
-        } else setFromChains(sorted.filter((e) => e.text === "Tezos" || e.text === "Polygon" || e.text === "Elrond"));
+            setFromChains(sorted.filter((e) => validatedChains.includes(e.text)));
+        } else  setFromChains(sorted.filter((e) => validatedChains.includes(e.text)));
     }, [
         elrondAccount,
         tezosAccount,
