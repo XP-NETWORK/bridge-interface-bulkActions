@@ -11,7 +11,10 @@ module.exports = function override(webpackConfig) {
     include: /node_modules/,
     type: "javascript/auto",
   });
-
+  webpackConfig.resolve.alias = {
+    ...webpackConfig.resolve.alias,
+    "@ledgerhq/devices/hid-framing": "@ledgerhq/devices/lib/hid-framing",
+  };
   webpackConfig = rewireBabelLoader.include(
     webpackConfig,
     resolveApp("node_modules/@dfinity")
