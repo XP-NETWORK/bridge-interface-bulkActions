@@ -4,7 +4,8 @@ footer {
     width: 1024px;
     z-index: 0;
 }
-  
+
+
   .footContainer {
     display: flex;
     justify-content: space-between;
